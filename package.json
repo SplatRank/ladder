@@ -1,0 +1,11 @@
+{
+  "name": "ladder",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SplatRank/ladder"
+  },
+  "license": "MIT"
+}
