@@ -7,5 +7,15 @@
     "type": "git",
     "url": "https://github.com/SplatRank/ladder"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "prisma:migrate": "dotenv -- prisma migrate dev"
+  },
+  "dependencies": {
+    "@prisma/client": "2.22.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^4.0.0",
+    "prisma": "2.22.1"
+  }
 }
