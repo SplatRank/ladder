@@ -1,8 +1,8 @@
 import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
+import { Prisma as PrismaAdapter } from 'next-auth/adapters';
 import Providers from 'next-auth/providers';
-import Adapters from 'next-auth/adapters';
-import prisma from '../../../prisma';
+import prisma from '@/prisma';
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
@@ -14,6 +14,6 @@ const options = {
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
     }),
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma }),
+  adapter: PrismaAdapter.Adapter({ prisma }),
   secret: process.env.SECRET,
 };
