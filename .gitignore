@@ -1,0 +1,11 @@
+# Environment specific
+.env
+docker-compose.override.yml
+
+# Node.js
+node_modules/
+cache/
+logs/
+
+# Next.js
+.next
