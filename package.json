@@ -11,7 +11,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "fetch:twitter": "tsc src/cli/twitter && dotenv -- node src/cli/twitter",
+    "fetch:twitter": "dotenv -- ts-node --transpile-only --compiler-options {\\\"module\\\":\\\"commonjs\\\"} src/cli/follower",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
