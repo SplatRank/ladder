@@ -9,25 +9,28 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "dev": "next",
+    "fetch:twitter": "tsc src/cli/twitter && dotenv -- node src/cli/twitter",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "prisma:migrate": "dotenv -- prisma migrate dev"
+    "prisma:migrate": "dotenv -- prisma migrate dev",
+    "start": "next start"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.1",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@prisma/client": "2.22.1",
+    "axios": "^0.21.1",
     "framer-motion": "^4.1.16",
     "next": "10.2.0",
     "next-auth": "^3.23.0",
     "next-translate": "^1.0.6",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "ts-node": "^10.0.0"
   },
   "devDependencies": {
     "@types/next-auth": "^3.15.0",
