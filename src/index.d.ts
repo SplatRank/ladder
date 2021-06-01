@@ -7,6 +7,7 @@ declare global {
     }
 
     interface ProcessEnv {
+      TWITTER_BEARER_TOKEN: string;
       TWITTER_CLIENT_ID: string;
       TWITTER_CLIENT_SECRET: string;
     }
