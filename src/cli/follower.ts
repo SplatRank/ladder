@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-imports */
 import prisma from '../prisma';
-import { twitterClient, UserObject } from './twitter-api';
+import { twitterClient, UserObject, UserObjectWithPublicMetrics } from './twitter-api';
 import { Prisma, SocialType } from '.prisma/client';
 
 const error = (message: unknown) => {
@@ -41,23 +41,25 @@ const fetch = async () => {
   // const ids = idRows.map(({ social_account_id: id }) => id);
 
   console.log(`Fetching Twitter followers for ${idsToFetch.length} user(s).`);
-  const res = await twitterClient<UserObject[]>('users', {
+  const res = await twitterClient<UserObjectWithPublicMetrics[]>('users', {
     query: {
       ids: idsToFetch.join(','),
       'user.fields': 'public_metrics',
     },
   });
   if (res.errors) {
-    error(res.errors);
+    console.error(res.errors);
   }
-
-  const data = res.data.map<Prisma.SocialFollowerCreateManyInput>((account) => ({
-    count: account.public_metrics.followers_count,
-    date: today,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    socialAccountId: accountsToFetch.find(({ socialId }) => socialId.toString() === account.id)!.id,
-  }));
-  await prisma.socialFollower.createMany({ data });
+  if (res.data) {
+    const data = res.data.map<Prisma.SocialFollowerCreateManyInput>((account) => ({
+      count: account.public_metrics.followers_count,
+      date: today,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      socialAccountId: accountsToFetch.find(({ socialId }) => socialId.toString() === account.id)!
+        .id,
+    }));
+    await prisma.socialFollower.createMany({ data });
+  }
 };
 
 // Register social account
